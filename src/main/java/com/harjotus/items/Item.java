@@ -9,9 +9,9 @@ public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
-    private int price;
+    public Long id;
+    public String name;
+    public int price;
 
     public Item() {}
 
@@ -43,6 +43,10 @@ public class Item {
     public Long getId(Long id) {
         return this.id;
     }
+
+    // public Item getItem() {
+    //     return new Item(name, price, id);
+    // }
 
     
 }
