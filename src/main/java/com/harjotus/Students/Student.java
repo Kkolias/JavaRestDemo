@@ -1,8 +1,15 @@
 package com.harjotus.Students;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+
+import com.harjotus.Courses.Course;
 
 @Entity
 public class Student {
@@ -12,6 +19,14 @@ public class Student {
     public Long id;
     public String name;
     public int age;
+
+    @ManyToMany
+    @JoinTable(
+        name = "courses", 
+        joinColumns = @JoinColumn(name = "student_id"), 
+        inverseJoinColumns = @JoinColumn(name = "course_id")
+    )
+    public List<Course> courses;
 
     public Student() {}
 
@@ -42,11 +57,13 @@ public class Student {
     
     public Long getId(Long id) {
         return this.id;
+    }    
+
+    public List<Course> getCourses() {
+        return this.courses;
     }
 
-    // public User getUser() {
-    //     return new User(name, price, id);
-    // }
-
-    
+    public void setCourse(Course course) {
+        this.courses.add(course);
+    }
 }
