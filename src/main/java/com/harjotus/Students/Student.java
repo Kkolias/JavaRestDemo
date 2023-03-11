@@ -1,23 +1,23 @@
-package com.harjotus.items;
+package com.harjotus.Students;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Item {
+public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
     public String name;
-    public int price;
+    public int age;
 
-    public Item() {}
+    public Student() {}
 
-    public Item(String name, int price) {
+    public Student(String name, int age) {
         this.name = name;
-        this.price = price;
+        this.age = age;
     }
 
     public String getName() {
@@ -29,11 +29,11 @@ public class Item {
     }
 
     public int getPrice() {
-        return this.price;
+        return this.age;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setPrice(int age) {
+        this.age = age;
     }
 
     public void setId(Long id) {
@@ -44,8 +44,8 @@ public class Item {
         return this.id;
     }
 
-    // public Item getItem() {
-    //     return new Item(name, price, id);
+    // public User getUser() {
+    //     return new User(name, price, id);
     // }
 
     

@@ -1,4 +1,4 @@
-package com.harjotus.items;
+package com.harjotus.Students;
 
 
 import java.util.List;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-// import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -22,33 +21,33 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(origins = "*")
-public class ItemRestController {
+public class StudentRestController {
 
    @Autowired
-   private ItemRepository itemRepository;
+   private StudentRepository userRepository;
 
     @PostConstruct
     public void init() {
-        itemRepository.save(
-            new Item("karkki", 2)
+        userRepository.save(
+            new Student("karkki", 2)
         );
     }
 
-    @GetMapping("/api/items/get-all")
-    public List<Item> listAll() {
-        return itemRepository.findAll();
+    @GetMapping("/api/students/get-all")
+    public List<Student> listAll() {
+        return userRepository.findAll();
     }
 
     
     @RequestMapping(
-    value = "/api/items/new-item", 
+    value = "/api/students/new-user", 
     method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Item> newItem( @RequestBody Item newItem) {
+    public ResponseEntity<Student> newUser( @RequestBody Student newUser) {
         
         try {
-            Item created = itemRepository.save(
-            new Item(newItem.name, newItem.price)
+            Student created = userRepository.save(
+            new Student(newUser.name, newUser.age)
         );
             return new ResponseEntity<>(created, HttpStatus.OK);
         } catch(Exception  e) {
@@ -58,20 +57,20 @@ public class ItemRestController {
     }
 
     @RequestMapping(
-    value = "/api/items/edit-item-name",
+    value = "/api/students/edit-user-name",
     method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Boolean> editItemName( @RequestBody Item payload) {
+    public ResponseEntity<Boolean> editUserName( @RequestBody Student payload) {
             Long id = payload.id;
             String name = payload.name;
-            Item item = itemRepository.findById(id).orElse(null);
+            Student User = userRepository.findById(id).orElse(null);
 
-            if(item == null) {
+            if(User == null) {
                 return new ResponseEntity<>(false , HttpStatus.NOT_FOUND);
             }
 
-            item.name = name;
-            itemRepository.save(item);
+            User.name = name;
+            userRepository.save(User);
             
             return new ResponseEntity<>(true , HttpStatus.OK);
         
